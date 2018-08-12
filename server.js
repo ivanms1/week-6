@@ -11,7 +11,9 @@ const website = require('./routes/websites');
 
 const app = express();
 
-app.use(logger('tiny'));
+if(process.env.NODE_ENV !== 'test'){
+	app.use(logger('tiny'))
+}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -27,3 +29,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
+
+module.exports = app;
